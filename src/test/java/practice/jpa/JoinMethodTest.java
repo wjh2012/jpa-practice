@@ -1,5 +1,10 @@
 package practice.jpa;
 
+import static practice.jpa.join_method.oneway.QJoinComment.joinComment;
+import static practice.jpa.join_method.oneway.QJoinPost.joinPost;
+import static practice.jpa.join_method.oneway.QJoinUser.joinUser;
+
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -171,6 +176,24 @@ public class JoinMethodTest {
 
         Assertions.assertThat(joinPostAllByUser).isNotEmpty();
         Assertions.assertThat(joinCommentAllByUser).isNotEmpty();
+    }
+
+    @Test
+    @Order(2)
+    void 단방향_querydsl_단건_조회_테스트() {
+        insertOneWayData();
+
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        List<JoinUser> fetch = query
+            .selectFrom(joinUser)
+            .join(joinPost.user, joinUser).fetchJoin()
+            .join(joinComment.user, joinUser).fetchJoin()
+            .where(
+                joinUser.name.eq("joinUser1")
+            )
+            .fetch();
+
     }
 
 }
