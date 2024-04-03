@@ -1,8 +1,8 @@
 package practice.jpa.basic.entity.sample.entity.oneway;
 
-import dniHtml.core.domain.BaseEntity;
-import dniHtml.core.infrastructure.util.GeneratorKeyValue;
 import lombok.*;
+import practice.jpa.basic.entity.sample.BaseEntity;
+import practice.jpa.basic.entity.sample.GeneratorKeyValue;
 
 import javax.persistence.*;
 
