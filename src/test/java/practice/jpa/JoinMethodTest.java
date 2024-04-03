@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,19 +159,19 @@ public class JoinMethodTest {
     @PersistenceContext
     private EntityManager em;
 
+
     @Test
-    void 단방향_JPA_조회_테스트() {
+    @Order(1)
+    void 단방향_JPA_단건_조회_테스트() {
         insertOneWayData();
 
-        JoinUser joinUser = joinUserRepository.findByName("joinUser1").orElseThrow();
-
-        List<JoinPost> joinPostAllByUser = joinPostRepository.findAllByUser(joinUser);
-        List<JoinComment> joinCommentAllByUser = joinCommentRepository.findAllByUser(joinUser);
+        JoinUser findUser = joinUserRepository.findByName("joinUser1").orElseThrow();
+        List<JoinPost> joinPostAllByUser = joinPostRepository.findAllByUser(findUser);
+        List<JoinComment> joinCommentAllByUser = joinCommentRepository.findAllByUser(findUser);
 
         Assertions.assertThat(joinPostAllByUser).isNotEmpty();
         Assertions.assertThat(joinCommentAllByUser).isNotEmpty();
-        System.out.println(joinPostAllByUser);
-        System.out.println(joinCommentAllByUser);
     }
+
 }
 
