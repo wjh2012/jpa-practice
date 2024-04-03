@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import practice.jpa.basic.entity.member.Member;
-import practice.jpa.basic.entity.uuid.UUIDMember;
-import practice.jpa.basic.repository.UUIDMember.UUIDMemberRepository;
-import practice.jpa.basic.repository.member.MemberRepository;
+import practice.jpa.jpaRepository.Member;
+import practice.jpa.uuid.UUIDMember;
+import practice.jpa.uuid.UUIDMemberRepository;
+import practice.jpa.jpaRepository.MemberRepository;
 
 import java.util.Optional;
 

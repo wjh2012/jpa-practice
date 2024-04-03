@@ -1,26 +1,25 @@
 package practice;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import practice.jpa.basic.entity.country.City;
-import practice.jpa.basic.entity.country.Country;
-import practice.jpa.basic.entity.country.District;
-import practice.jpa.basic.entity.country.Town;
-import practice.jpa.basic.entity.sample.entity.oneway.SampleMember;
-import practice.jpa.basic.entity.sample.entity.oneway.SampleTeam;
-import practice.jpa.basic.entity.sample.entity.twoway.SampleGroup;
-import practice.jpa.basic.entity.sample.entity.twoway.SampleUser;
-import practice.jpa.basic.entity.sample.repository.SampleGroupRepository;
-import practice.jpa.basic.entity.sample.repository.SampleMemberRepository;
-import practice.jpa.basic.entity.sample.repository.SampleTeamRepository;
-import practice.jpa.basic.entity.sample.repository.SampleUserRepository;
-import practice.jpa.basic.entity.uuid.UUIDMember;
-import practice.jpa.basic.repository.UUIDMember.UUIDMemberRepository;
-import practice.jpa.basic.service.CountryService;
-
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import practice.jpa.uuid.UUIDMember;
+import practice.jpa.uuid.UUIDMemberRepository;
+import practice.jpa.one_to_many.CountryService;
+import practice.jpa.one_to_many.entity.City;
+import practice.jpa.one_to_many.entity.Country;
+import practice.jpa.one_to_many.entity.District;
+import practice.jpa.one_to_many.entity.Town;
+import practice.jpa.oracle_standard.entity.oneway.SampleMember;
+import practice.jpa.oracle_standard.entity.oneway.SampleTeam;
+import practice.jpa.oracle_standard.entity.twoway.SampleGroup;
+import practice.jpa.oracle_standard.entity.twoway.SampleUser;
+import practice.jpa.oracle_standard.repository.SampleGroupRepository;
+import practice.jpa.oracle_standard.repository.SampleMemberRepository;
+import practice.jpa.oracle_standard.repository.SampleTeamRepository;
+import practice.jpa.oracle_standard.repository.SampleUserRepository;
 
 @Component
 @RequiredArgsConstructor
