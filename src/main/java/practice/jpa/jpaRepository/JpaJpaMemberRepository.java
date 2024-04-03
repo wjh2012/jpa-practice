@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface MemberRepository extends CrudRepository<Member, Long>, MemberRepositoryCustom {
+public interface JpaJpaMemberRepository extends CrudRepository<JpaMember, Long>,
+    JpaMemberRepositoryCustom {
 
-    Optional<Member> findByName(String name);
+    Optional<JpaMember> findByName(String name);
 }

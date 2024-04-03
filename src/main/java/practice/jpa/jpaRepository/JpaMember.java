@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Member {
+public class JpaMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import practice.jpa.jpaRepository.Member;
+import practice.jpa.jpaRepository.JpaMember;
 import practice.jpa.uuid.UUIDMember;
 import practice.jpa.uuid.UUIDMemberRepository;
-import practice.jpa.jpaRepository.MemberRepository;
+import practice.jpa.jpaRepository.JpaJpaMemberRepository;
 
 import java.util.Optional;
 
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class EqualityTest {
 
     @Autowired
-    MemberRepository memberRepository;
+    JpaJpaMemberRepository jpaMemberRepository;
 
     @Autowired
     UUIDMemberRepository uuidMemberRepository;
@@ -31,16 +31,16 @@ public class EqualityTest {
         // given
         final String name = "testMember";
 
-        Member member = new Member();
-        member.setName("testMember");
-        memberRepository.save(member);
+        JpaMember jpaMember = new JpaMember();
+        jpaMember.setName("testMember");
+        jpaMemberRepository.save(jpaMember);
 
         // when
-        Optional<Member> findMemberOptional = memberRepository.findByName(name);
-        Member findMember = findMemberOptional.orElseThrow();
+        Optional<JpaMember> findMemberOptional = jpaMemberRepository.findByName(name);
+        JpaMember findJpaMember = findMemberOptional.orElseThrow();
 
         // then
-        Assertions.assertThat(findMember).isNotEqualTo(member);
+        Assertions.assertThat(findJpaMember).isNotEqualTo(jpaMember);
     }
 
     @Test
@@ -49,16 +49,16 @@ public class EqualityTest {
         // given
         final String name = "testMember2";
 
-        Member member = new Member();
-        member.setName("testMember2");
-        memberRepository.save(member);
+        JpaMember jpaMember = new JpaMember();
+        jpaMember.setName("testMember2");
+        jpaMemberRepository.save(jpaMember);
 
         // when
-        Optional<Member> findMemberOptional = memberRepository.findByName(name);
-        Member findMember = findMemberOptional.orElseThrow();
+        Optional<JpaMember> findMemberOptional = jpaMemberRepository.findByName(name);
+        JpaMember findJpaMember = findMemberOptional.orElseThrow();
 
         // then
-        Assertions.assertThat(findMember).isEqualTo(member);
+        Assertions.assertThat(findJpaMember).isEqualTo(jpaMember);
     }
 
 
