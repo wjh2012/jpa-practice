@@ -6,6 +6,14 @@ import practice.jpa.basic.entity.country.City;
 import practice.jpa.basic.entity.country.Country;
 import practice.jpa.basic.entity.country.District;
 import practice.jpa.basic.entity.country.Town;
+import practice.jpa.basic.entity.sample.entity.oneway.SampleMember;
+import practice.jpa.basic.entity.sample.entity.oneway.SampleTeam;
+import practice.jpa.basic.entity.sample.entity.twoway.SampleGroup;
+import practice.jpa.basic.entity.sample.entity.twoway.SampleUser;
+import practice.jpa.basic.entity.sample.repository.SampleGroupRepository;
+import practice.jpa.basic.entity.sample.repository.SampleMemberRepository;
+import practice.jpa.basic.entity.sample.repository.SampleTeamRepository;
+import practice.jpa.basic.entity.sample.repository.SampleUserRepository;
 import practice.jpa.basic.entity.uuid.UUIDMember;
 import practice.jpa.basic.repository.UUIDMember.UUIDMemberRepository;
 import practice.jpa.basic.service.CountryService;
@@ -20,10 +28,36 @@ public class DBInit {
 
     private final CountryService countryService;
     private final UUIDMemberRepository UUIDMemberRepository;
+    private final SampleMemberRepository sampleMemberRepository;
+    private final SampleTeamRepository sampleTeamRepository;
+    private final SampleUserRepository sampleUserRepository;
+    private final SampleGroupRepository sampleGroupRepository;
+
 
     @PostConstruct
     public void init() {
 //        saveSampleCountry();
+        sampleTest();
+    }
+
+    private void sampleTest() {
+        SampleMember sampleMember = SampleMember.builder().build();
+        SampleTeam sampleTeam = SampleTeam.builder().build();
+        SampleUser sampleUser = SampleUser.builder().build();
+        SampleGroup sampleGroup = SampleGroup.builder().build();
+
+        sampleGroupRepository.save(sampleGroup);
+        sampleUserRepository.save(sampleUser);
+        sampleTeamRepository.save(sampleTeam);
+        sampleMemberRepository.save(sampleMember);
+
+        SampleUser sampleUser2 = SampleUser.builder().build();
+        sampleUser2.setSampleGroup(sampleGroup);
+        sampleUserRepository.save(sampleUser2);
+
+        SampleMember sampleMember2 = SampleMember.builder().build();
+        sampleMember2.setSampleTeam(sampleTeam);
+        sampleMemberRepository.save(sampleMember2);
     }
 
     private void saveSampleCountry() {
