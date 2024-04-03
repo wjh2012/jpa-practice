@@ -1,8 +1,9 @@
 package practice.jpa.basic.entity.sample.entity.oneway;
 
+import dniHtml.core.domain.BaseEntity;
+import dniHtml.core.infrastructure.util.GeneratorKeyValue;
 import lombok.*;
-import practice.jpa.basic.entity.sample.entity.BaseEntity;
-import practice.jpa.basic.entity.sample.entity.GeneratorKeyValue;
+import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
 
@@ -45,13 +46,15 @@ public class SampleMember extends BaseEntity {
      * 샘플 멤버 설명
      */
     @Column(name = "SAMPLE_MEMBER_DESC", length = 200)
+    @Comment("db 코멘트 테스트")
     private String sampleMemberDesc;
 
     /**
      * N:1 단방향
      */
-    @ManyToOne
-    @JoinColumn(name = "SAMPLE_TEAM_ID") // 조인할 상대의 실제 테이블 컬럼명
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SAMPLE_TEAM_ID", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    // 조인할 상대의 실제 테이블 컬럼명 // 실제 DB의 외래키는 설정하지 않음
     private SampleTeam sampleTeam;
 
 

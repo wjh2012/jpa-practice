@@ -1,4 +1,4 @@
-package practice.jpa.basic.entity.sample.entity;
+package practice.jpa.basic.entity.sample;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

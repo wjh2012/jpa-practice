@@ -1,8 +1,8 @@
 package practice.jpa.basic.entity.sample.entity.twoway;
 
+import dniHtml.core.domain.BaseEntity;
+import dniHtml.core.infrastructure.util.GeneratorKeyValue;
 import lombok.*;
-import practice.jpa.basic.entity.sample.entity.BaseEntity;
-import practice.jpa.basic.entity.sample.entity.GeneratorKeyValue;
 
 import javax.persistence.*;
 
@@ -24,7 +24,7 @@ public class SampleUser extends BaseEntity {
     @Column(name = "SAMPLE_USER_ID", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_SAMPLE_USER_PK_SEQ_GENERATOR")
     @SequenceGenerator(name = "TB_SAMPLE_USER_PK_SEQ_GENERATOR", sequenceName = "TB_SAMPLE_USER_PK_SEQ", // 실제 시퀀스 테이블명
-            initialValue = 1, allocationSize = 100)
+            initialValue = 1, allocationSize = 50)
     private Long id;
 
     /**
@@ -42,8 +42,9 @@ public class SampleUser extends BaseEntity {
     /**
      * N:1 양방향
      */
-    @ManyToOne
-    @JoinColumn(name = "SAMPLE_GROUP_ID") // 조인할 상대의 실제 테이블 컬럼명
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "SAMPLE_GROUP_ID", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    // 조인할 상대의 실제 테이블 컬럼명 // 실제 DB의 외래키는 설정하지 않음
     private SampleGroup sampleGroup;
 
     /**

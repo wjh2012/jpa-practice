@@ -1,8 +1,8 @@
 package practice.jpa.basic.entity.sample.entity.twoway;
 
+import dniHtml.core.domain.BaseEntity;
+import dniHtml.core.infrastructure.util.GeneratorKeyValue;
 import lombok.*;
-import practice.jpa.basic.entity.sample.entity.BaseEntity;
-import practice.jpa.basic.entity.sample.entity.GeneratorKeyValue;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class SampleGroup extends BaseEntity {
             name = "TB_SAMPLE_GROUP_PK_SEQ_GENERATOR",
             sequenceName = "TB_SAMPLE_GROUP_PK_SEQ", // 실제 시퀀스 테이블명
             initialValue = 1,
-            allocationSize = 100
+            allocationSize = 50
     )
     private Long id;
 
@@ -50,7 +50,8 @@ public class SampleGroup extends BaseEntity {
     /**
      * 1:N 양방향
      */
-    @OneToMany(mappedBy = "sampleGroup") // 주의! 다(many) 쪽의 변수명을 정확히 적어야함
+    @OneToMany(mappedBy = "sampleGroup", fetch = FetchType.LAZY) // 주의! 다(many) 쪽의 변수명을 정확히 적어야함
+    @Builder.Default
     private List<SampleUser> sampleUsers = new ArrayList<>();
 
     /**
