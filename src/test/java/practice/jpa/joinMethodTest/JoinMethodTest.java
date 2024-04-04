@@ -8,12 +8,11 @@ import static practice.jpa.join_method.oneway.QJoinUser.joinUser;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -28,8 +27,12 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import practice.jpa.join_method.dto.MemberCodeCommitDTO2;
 import practice.jpa.join_method.dto.UserPostImageDTO;
-import practice.jpa.join_method.oneway.*;
 import practice.jpa.join_method.oneway.JoinImage;
+import practice.jpa.join_method.oneway.JoinImageRepository;
+import practice.jpa.join_method.oneway.JoinPost;
+import practice.jpa.join_method.oneway.JoinPostRepository;
+import practice.jpa.join_method.oneway.JoinUser;
+import practice.jpa.join_method.oneway.JoinUserRepository;
 import practice.jpa.join_method.twoway.JoinCode;
 import practice.jpa.join_method.twoway.JoinCodeRepository;
 import practice.jpa.join_method.twoway.JoinCommit;
@@ -66,6 +69,8 @@ public class JoinMethodTest {
     @Order(1)
     void 단방향_JPA_단건_조회_테스트() {
         insertOneWayData();
+        em.flush();
+        em.clear();
 
         JoinUser findUser = joinUserRepository.findByName("joinUser1").orElseThrow();
         List<JoinPost> joinPostAllByUser = joinPostRepository.findAllByUser(findUser);
@@ -79,6 +84,8 @@ public class JoinMethodTest {
     @Order(2)
     void 단방향_querydsl_단건_조회_테스트() {
         insertOneWayData();
+        em.flush();
+        em.clear();
 
         JPAQueryFactory query = new JPAQueryFactory(em);
 
@@ -107,6 +114,8 @@ public class JoinMethodTest {
     @Order(3)
     void 단방향_querydsl_단건_튜플_조회_테스트() {
         insertOneWayData();
+        em.flush();
+        em.clear();
 
         JPAQueryFactory query = new JPAQueryFactory(em);
 
@@ -128,6 +137,8 @@ public class JoinMethodTest {
     @Order(4)
     void 단방향_querydsl_단건_DTO_조회_테스트() {
         insertOneWayData();
+        em.flush();
+        em.clear();
 
         JPAQueryFactory query = new JPAQueryFactory(em);
 
@@ -146,12 +157,16 @@ public class JoinMethodTest {
 
     }
 
+
     @Test
     @Order(5)
     void 양방향_JPA_단건_조회_테스트() {
         insertTwowayData();
+        em.flush();
+        em.clear();
 
         JoinMember findMember = joinMemberRepository.findByName("joinMember1").orElseThrow();
+
         MemberCodeCommitDTO2 memberCodeCommitDTO2 = new MemberCodeCommitDTO2();
         memberCodeCommitDTO2.setMemberName("joinMember1");
         memberCodeCommitDTO2.setCodeNames(
@@ -159,6 +174,7 @@ public class JoinMethodTest {
         memberCodeCommitDTO2.setCommitNames(
             findMember.getCommits().stream().map(JoinCommit::getName).collect(Collectors.toList()));
 
+        System.out.println(memberCodeCommitDTO2);
     }
 
     private void insertOneWayData() {

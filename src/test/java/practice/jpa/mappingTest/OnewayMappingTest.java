@@ -1,6 +1,14 @@
 package practice.jpa.mappingTest;
 
-import org.junit.jupiter.api.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,9 +16,6 @@ import practice.jpa.mapping.oneway.ManyToOne.Oneway_Member_Master;
 import practice.jpa.mapping.oneway.ManyToOne.Oneway_Team_Slave;
 import practice.jpa.mapping.oneway.OneToMany.Oneway_Member_Slave;
 import practice.jpa.mapping.oneway.OneToMany.Oneway_Team_Master;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 
 @DisplayName("단방향 연관관계 테스트")

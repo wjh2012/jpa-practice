@@ -1,11 +1,10 @@
 package practice.jpa.mapping.oneway.ManyToOne;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,8 +18,8 @@ public class ParentDTO {
 
     public static ParentDTO fromEntity(ParentDTO entity) {
         return ParentDTO.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .build();
+            .id(entity.getId())
+            .name(entity.getName())
+            .build();
     }
 }

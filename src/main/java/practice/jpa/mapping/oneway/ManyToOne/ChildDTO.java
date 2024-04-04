@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ChildDTO {
+
     private String id;
     private String name;
 
     public static ChildDTO fromEntity(ChildDTO entity) {
         return ChildDTO.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .build();
+            .id(entity.getId())
+            .name(entity.getName())
+            .build();
     }
 }

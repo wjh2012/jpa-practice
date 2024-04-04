@@ -1,15 +1,20 @@
 package practice.jpa.mappingTest;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import practice.jpa.mapping.twoway.noMaster.Twoway_Member;
 import practice.jpa.mapping.twoway.noMaster.Twoway_Team;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @DisplayName("양방향 연관관계 주인없음 테스트")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -17,6 +22,7 @@ import java.util.List;
 @Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TwowayNoMasterTest {
+
     @PersistenceContext
     private EntityManager em;
 

@@ -5,8 +5,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import practice.jpa.uuid.UUIDMember;
-import practice.jpa.uuid.UUIDMemberRepository;
 import practice.jpa.one_to_many.CountryService;
 import practice.jpa.one_to_many.entity.City;
 import practice.jpa.one_to_many.entity.Country;
@@ -20,6 +18,8 @@ import practice.jpa.oracle_standard.repository.SampleGroupRepository;
 import practice.jpa.oracle_standard.repository.SampleMemberRepository;
 import practice.jpa.oracle_standard.repository.SampleTeamRepository;
 import practice.jpa.oracle_standard.repository.SampleUserRepository;
+import practice.jpa.uuid.UUIDMember;
+import practice.jpa.uuid.UUIDMemberRepository;
 
 @Component
 @RequiredArgsConstructor

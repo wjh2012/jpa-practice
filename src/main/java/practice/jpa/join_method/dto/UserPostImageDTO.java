@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserPostImageDTO {
+
     private String userName;
     private String postName;
     private String imageName;

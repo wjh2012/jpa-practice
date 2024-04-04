@@ -1,10 +1,8 @@
 package practice.jpa.uuid;
 
-import org.springframework.data.repository.CrudRepository;
-import practice.jpa.uuid.UUIDMember;
-
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.repository.CrudRepository;
 
 public interface UUIDMemberRepository extends CrudRepository<UUIDMember, UUID> {
 

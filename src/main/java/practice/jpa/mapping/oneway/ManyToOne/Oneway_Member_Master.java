@@ -1,8 +1,15 @@
 package practice.jpa.mapping.oneway.ManyToOne;
 
-import lombok.*;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -11,6 +18,7 @@ import javax.persistence.*;
 @Builder
 @Entity
 public class Oneway_Member_Master {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

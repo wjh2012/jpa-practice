@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberCodeCommitDTO {
+
     private String memberName;
     private String codeName;
     private String commitName;

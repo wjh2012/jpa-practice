@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +18,6 @@ import org.hibernate.annotations.BatchSize;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class JoinMember {
 
@@ -31,11 +29,9 @@ public class JoinMember {
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     @BatchSize(size = 100)
-    @Builder.Default
     private List<JoinCode> codes = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     @BatchSize(size = 100)
-    @Builder.Default
     private List<JoinCommit> commits = new ArrayList<>();
 }

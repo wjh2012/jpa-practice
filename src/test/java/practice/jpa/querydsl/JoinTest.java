@@ -1,20 +1,24 @@
 package practice.jpa.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import practice.jpa.mapping.twoway.ManyToOne.QTwoway_Member_Master;
 import practice.jpa.mapping.twoway.ManyToOne.QTwoway_Team_Slave;
 import practice.jpa.mapping.twoway.ManyToOne.Twoway_Member_Master;
 import practice.jpa.mapping.twoway.ManyToOne.Twoway_Team_Slave;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @DisplayName("조인 테스트")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)

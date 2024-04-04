@@ -42,20 +42,18 @@ public class SampleMember extends BaseEntity {
     @Id
     @Column(name = "SAMPLE_MEMBER_ID", nullable = false, updatable = false)
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "TB_SAMPLE_MEMBER_PK_SEQ_GENERATOR")
+        strategy = GenerationType.SEQUENCE,
+        generator = "TB_SAMPLE_MEMBER_PK_SEQ_GENERATOR")
     @SequenceGenerator(
-            name = "TB_SAMPLE_MEMBER_PK_SEQ_GENERATOR",
-            sequenceName = "TB_SAMPLE_MEMBER_PK_SEQ", // 실제 시퀀스 테이블명
-            initialValue = 1,
-            allocationSize = 50
+        name = "TB_SAMPLE_MEMBER_PK_SEQ_GENERATOR",
+        sequenceName = "TB_SAMPLE_MEMBER_PK_SEQ", // 실제 시퀀스 테이블명
+        initialValue = 1,
+        allocationSize = 50
     )
     private Long id;
 
     /**
-     * 본인 DB와 동일하게
-     * Column  지정된 제약조건이 ddl-auto 테이블 생성 시 자동으로 적용됩니다.
-     * length, unique, nullable 등
+     * 본인 DB와 동일하게 Column  지정된 제약조건이 ddl-auto 테이블 생성 시 자동으로 적용됩니다. length, unique, nullable 등
      */
     @Column(name = "SAMPLE_MEMBER_NM", length = 100)
     private String sampleMemberNm;

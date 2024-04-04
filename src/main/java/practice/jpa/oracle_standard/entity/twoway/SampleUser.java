@@ -42,7 +42,7 @@ public class SampleUser extends BaseEntity {
     @Column(name = "SAMPLE_USER_ID", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB_SAMPLE_USER_PK_SEQ_GENERATOR")
     @SequenceGenerator(name = "TB_SAMPLE_USER_PK_SEQ_GENERATOR", sequenceName = "TB_SAMPLE_USER_PK_SEQ", // 실제 시퀀스 테이블명
-            initialValue = 1, allocationSize = 50)
+        initialValue = 1, allocationSize = 50)
     private Long id;
 
     /**
