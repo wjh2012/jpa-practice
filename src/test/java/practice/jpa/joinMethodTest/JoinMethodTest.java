@@ -1,5 +1,6 @@
 package practice.jpa.joinMethodTest;
 
+
 import static practice.jpa.join_method.oneway.QJoinImage.joinImage;
 import static practice.jpa.join_method.oneway.QJoinPost.joinPost;
 import static practice.jpa.join_method.oneway.QJoinUser.joinUser;
@@ -82,24 +83,24 @@ public class JoinMethodTest {
         JPAQueryFactory query = new JPAQueryFactory(em);
 
         List<JoinUser> fetch1 = query
-                .select(joinUser)
-                .from(joinUser)
-                .where(joinUser.name.eq("joinUser1"))
-                .fetch();
+            .select(joinUser)
+            .from(joinUser)
+            .where(joinUser.name.eq("joinUser1"))
+            .fetch();
 
         List<JoinPost> fetch2 = query
-                .select(joinPost)
-                .from(joinPost)
-                .leftJoin(joinPost.user, joinUser).fetchJoin()
-                .where(joinUser.name.eq("joinUser1"))
-                .fetch();
+            .select(joinPost)
+            .from(joinPost)
+            .leftJoin(joinPost.user, joinUser).fetchJoin()
+            .where(joinUser.name.eq("joinUser1"))
+            .fetch();
 
         List<JoinImage> fetch3 = query
-                .select(joinImage)
-                .from(joinImage)
-                .leftJoin(joinImage.user, joinUser).fetchJoin()
-                .where(joinUser.name.eq("joinUser1"))
-                .fetch();
+            .select(joinImage)
+            .from(joinImage)
+            .leftJoin(joinImage.user, joinUser).fetchJoin()
+            .where(joinUser.name.eq("joinUser1"))
+            .fetch();
     }
 
     @Test
@@ -110,15 +111,16 @@ public class JoinMethodTest {
         JPAQueryFactory query = new JPAQueryFactory(em);
 
         List<Tuple> result = query
-                .selectDistinct(joinUser, joinPost, joinImage)
-                .from(joinUser)
-                .leftJoin(joinImage).on(joinImage.user.eq(joinUser))
-                .leftJoin(joinPost).on(joinPost.user.eq(joinUser))
-                .where(joinUser.name.eq("joinUser1"))
-                .fetch();
+            .selectDistinct(joinUser, joinPost, joinImage)
+            .from(joinUser)
+            .leftJoin(joinImage).on(joinImage.user.eq(joinUser))
+            .leftJoin(joinPost).on(joinPost.user.eq(joinUser))
+            .where(joinUser.name.eq("joinUser1"))
+            .fetch();
 
         result.forEach(t -> {
-            System.out.println(t.get(joinUser).getName() + t.get(joinPost).getName() + t.get(joinImage).getName());
+            System.out.println(
+                t.get(joinUser).getName() + t.get(joinPost).getName() + t.get(joinImage).getName());
         });
     }
 
@@ -130,15 +132,15 @@ public class JoinMethodTest {
         JPAQueryFactory query = new JPAQueryFactory(em);
 
         List<UserPostImageDTO> result = query
-                .select(Projections.bean(UserPostImageDTO.class,
-                        joinUser.name.as("userName"),
-                        joinPost.name.as("postName"),
-                        joinImage.name.as("imageName")))
-                .from(joinUser)
-                .leftJoin(joinImage).on(joinImage.user.eq(joinUser))
-                .leftJoin(joinPost).on(joinPost.user.eq(joinUser))
-                .where(joinUser.name.eq("joinUser1"))
-                .fetch();
+            .select(Projections.bean(UserPostImageDTO.class,
+                joinUser.name.as("userName"),
+                joinPost.name.as("postName"),
+                joinImage.name.as("imageName")))
+            .from(joinUser)
+            .leftJoin(joinImage).on(joinImage.user.eq(joinUser))
+            .leftJoin(joinPost).on(joinPost.user.eq(joinUser))
+            .where(joinUser.name.eq("joinUser1"))
+            .fetch();
 
         result.forEach(System.out::println);
 
@@ -150,13 +152,13 @@ public class JoinMethodTest {
         insertTwowayData();
 
         JoinMember findMember = joinMemberRepository.findByName("joinMember1").orElseThrow();
-
         MemberCodeCommitDTO2 memberCodeCommitDTO2 = new MemberCodeCommitDTO2();
         memberCodeCommitDTO2.setMemberName("joinMember1");
-        memberCodeCommitDTO2.setCodeNames(findMember.getCodes().stream().map(JoinCode::getName).collect(Collectors.toList()));
-        memberCodeCommitDTO2.setCommitNames(findMember.getCommits().stream().map(JoinCommit::getName).collect(Collectors.toList()));
+        memberCodeCommitDTO2.setCodeNames(
+            findMember.getCodes().stream().map(JoinCode::getName).collect(Collectors.toList()));
+        memberCodeCommitDTO2.setCommitNames(
+            findMember.getCommits().stream().map(JoinCommit::getName).collect(Collectors.toList()));
 
-        System.out.println(memberCodeCommitDTO2);
     }
 
     private void insertOneWayData() {
@@ -263,7 +265,6 @@ public class JoinMethodTest {
         joinCode4.setMember(joinMember2);
         joinCode5.setMember(joinMember2);
         joinCode6.setMember(joinMember2);
-
 
         joinCommit1.setName("commitnamee");
         joinCommit2.setName("commitnamee");

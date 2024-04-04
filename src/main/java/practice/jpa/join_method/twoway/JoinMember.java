@@ -8,14 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @Setter
@@ -40,5 +38,4 @@ public class JoinMember {
     @BatchSize(size = 100)
     @Builder.Default
     private List<JoinCommit> commits = new ArrayList<>();
-    ;
 }
