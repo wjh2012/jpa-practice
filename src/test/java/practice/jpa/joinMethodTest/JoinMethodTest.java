@@ -177,7 +177,32 @@ public class JoinMethodTest {
         System.out.println(memberCodeCommitDTO2);
     }
 
-    private void insertOneWayData() {
+
+    @Test
+    @Order(6)
+    void 양방향_JPA_다건_조회_테스트() {
+        insertTwowayData();
+        em.flush();
+        em.clear();
+
+        Iterable<JoinMember> allMember = joinMemberRepository.findAll();
+
+        List<MemberCodeCommitDTO2> memberCodeCommitDTO2s = new ArrayList<>();
+
+        allMember.forEach(member -> {
+            MemberCodeCommitDTO2 memberCodeCommitDTO2 = new MemberCodeCommitDTO2();
+            memberCodeCommitDTO2.setMemberName(member.getName());
+            memberCodeCommitDTO2.setCodeNames(
+                member.getCodes().stream().map(JoinCode::getName).collect(Collectors.toList()));
+            memberCodeCommitDTO2.setCommitNames(
+                member.getCommits().stream().map(JoinCommit::getName).collect(Collectors.toList()));
+        });
+
+        System.out.println(memberCodeCommitDTO2s);
+    }
+
+
+    public void insertOneWayData() {
         // 단방향
         JoinUser joinUser1 = new JoinUser();
         JoinUser joinUser2 = new JoinUser();
