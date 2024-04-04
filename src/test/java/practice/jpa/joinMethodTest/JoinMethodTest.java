@@ -9,6 +9,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -22,7 +23,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import practice.jpa.join_method.dto.MemberCodeCommitDTO2;
 import practice.jpa.join_method.dto.UserPostImageDTO;
 import practice.jpa.join_method.oneway.*;
 import practice.jpa.join_method.oneway.JoinImage;
@@ -38,6 +41,7 @@ import practice.jpa.join_method.twoway.JoinMemberRepository;
 @SpringBootTest
 @Transactional
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Rollback(value = false)
 public class JoinMethodTest {
 
     @Autowired
@@ -80,18 +84,21 @@ public class JoinMethodTest {
         List<JoinUser> fetch1 = query
                 .select(joinUser)
                 .from(joinUser)
+                .where(joinUser.name.eq("joinUser1"))
                 .fetch();
 
         List<JoinPost> fetch2 = query
                 .select(joinPost)
                 .from(joinPost)
                 .leftJoin(joinPost.user, joinUser).fetchJoin()
+                .where(joinUser.name.eq("joinUser1"))
                 .fetch();
 
         List<JoinImage> fetch3 = query
                 .select(joinImage)
                 .from(joinImage)
                 .leftJoin(joinImage.user, joinUser).fetchJoin()
+                .where(joinUser.name.eq("joinUser1"))
                 .fetch();
     }
 
@@ -107,6 +114,7 @@ public class JoinMethodTest {
                 .from(joinUser)
                 .leftJoin(joinImage).on(joinImage.user.eq(joinUser))
                 .leftJoin(joinPost).on(joinPost.user.eq(joinUser))
+                .where(joinUser.name.eq("joinUser1"))
                 .fetch();
 
         result.forEach(t -> {
@@ -129,10 +137,26 @@ public class JoinMethodTest {
                 .from(joinUser)
                 .leftJoin(joinImage).on(joinImage.user.eq(joinUser))
                 .leftJoin(joinPost).on(joinPost.user.eq(joinUser))
+                .where(joinUser.name.eq("joinUser1"))
                 .fetch();
 
         result.forEach(System.out::println);
 
+    }
+
+    @Test
+    @Order(5)
+    void 양방향_JPA_단건_조회_테스트() {
+        insertTwowayData();
+
+        JoinMember findMember = joinMemberRepository.findByName("joinMember1").orElseThrow();
+
+        MemberCodeCommitDTO2 memberCodeCommitDTO2 = new MemberCodeCommitDTO2();
+        memberCodeCommitDTO2.setMemberName("joinMember1");
+        memberCodeCommitDTO2.setCodeNames(findMember.getCodes().stream().map(JoinCode::getName).collect(Collectors.toList()));
+        memberCodeCommitDTO2.setCommitNames(findMember.getCommits().stream().map(JoinCommit::getName).collect(Collectors.toList()));
+
+        System.out.println(memberCodeCommitDTO2);
     }
 
     private void insertOneWayData() {
@@ -241,11 +265,11 @@ public class JoinMethodTest {
         joinCode6.setMember(joinMember2);
 
 
+        joinCommit1.setName("commitnamee");
         joinCommit2.setName("commitnamee");
         joinCommit3.setName("commitnamee");
         joinCommit4.setName("commitnamee");
         joinCommit5.setName("commitnamee");
-        joinCommit1.setName("commitnamee");
         joinCommit6.setName("commitnamee");
 
         joinCommit1.setMember(joinMember1);
