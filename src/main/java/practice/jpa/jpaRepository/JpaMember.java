@@ -16,10 +16,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
-public class JpaMember {
+public class JpaMember extends JpaBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
 }
