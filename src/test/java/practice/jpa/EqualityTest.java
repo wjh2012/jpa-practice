@@ -60,7 +60,6 @@ public class EqualityTest {
         Assertions.assertThat(findJpaMember).isEqualTo(jpaMember);
     }
 
-
     @Test
     void Transactional_EqualsAndHashCode_저장_조회_시_엔티티_일치() {
         // given

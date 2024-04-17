@@ -1,4 +1,4 @@
-package practice.jpa.joinMethodTest;
+package practice.jpa;
 
 
 import static practice.jpa.join_method.oneway.QJoinImage.joinImage;
@@ -63,7 +63,6 @@ public class JoinMethodTest {
 
     @PersistenceContext
     private EntityManager em;
-
 
     @Test
     @Order(1)
@@ -200,7 +199,6 @@ public class JoinMethodTest {
 
         System.out.println(memberCodeCommitDTO2s);
     }
-
 
     public void insertOneWayData() {
         // 단방향

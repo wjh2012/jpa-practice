@@ -1,4 +1,4 @@
-package practice.jpa.em;
+package practice.jpa;
 
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
